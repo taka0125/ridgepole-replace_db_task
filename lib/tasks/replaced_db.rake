@@ -5,6 +5,7 @@ namespace :db do
     ::Ridgepole::ReplaceDbTask::Executor.call(rails_env, options, block)
   end
 
+  desc 'db migrate use ridgepole'
   task migrate: :environment do
     ENV['RAILS_ENV'] ||= 'development'
     apply(ENV['RAILS_ENV'], '--apply') { |line| puts line }
