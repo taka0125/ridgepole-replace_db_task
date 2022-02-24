@@ -10,7 +10,7 @@ namespace :db do
     ENV['RAILS_ENV'] ||= 'development'
     apply(ENV['RAILS_ENV'], '--apply') { |line| puts line }
 
-    if ENV['RAILS_ENV'] == 'development'
+    if ENV['RAILS_ENV'] == 'development' && ::Ridgepole::ReplaceDbTask.config.migrate_with_test_when_development
       apply('test', '--apply') { |line| puts line }
     end
   end
