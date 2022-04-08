@@ -23,7 +23,7 @@ module Ridgepole
       config.ridgepole = 'bundle exec ridgepole'
       config.skip_drop_table = false
       config.ignore_tables = []
-      config.migrate_with_test_when_development = true
+      config.multiple_migration_settings = {development: %i[test]}
     end
   end
 end
