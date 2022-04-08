@@ -11,6 +11,7 @@ module Ridgepole
       config_accessor :skip_drop_table
       config_accessor :ignore_tables
       config_accessor :migrate_with_test_when_development
+      config_accessor :multiple_migration_settings
     end
   end
 end
