@@ -14,7 +14,7 @@ class Ridgepole::ReplaceDbTask::Executor
         -c #{Ridgepole::ReplaceDbTask.config.database_yml_path} \
         -f #{Ridgepole::ReplaceDbTask.config.schema_file_path} \
         #{ignore_tables_option} \
-        #{skip_drop_table_option} \
+        #{drop_table_option} \
         #{@options} \
         -E #{@rails_env}
 EOD
@@ -50,8 +50,8 @@ EOD
     ignore_tables.present? ? '--ignore-tables ' + ignore_tables.map { |t| t.is_a?(Regexp) ? t.source : "^#{t}$" }.join(',') : ''
   end
 
-  def skip_drop_table_option
+  def drop_table_option
     skip_drop_table = Ridgepole::ReplaceDbTask.config.skip_drop_table
-    skip_drop_table ? '--skip-drop-table' : ''
+    skip_drop_table ? '' : '--drop-table'
   end
 end
