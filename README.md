@@ -20,10 +20,37 @@ Or install it yourself as:
 
 ## Make initializer file
 
+- multiple database
+
 ```config/initializers/ridgepole/replace_db_task.rb
 Ridgepole::ReplaceDbTask.configure do |config|
-  config.database_yml_path = ::Rails.root.join('config', 'database.yml')
-  config.schema_file_path = ::Rails.root.join('db', 'schemas', 'Schemafile')
+  config.database_yml_path = ::Rails.root.join('config/database.yml')
+
+  config.spec_configs = [
+    ::Ridgepole::ReplaceDbTask::SpecConfig.new(
+      spec_name: :primary,
+      schema_file_path: ::Rails.root.join('db/schemas/primary/Schemafile'),
+    ),
+    ::Ridgepole::ReplaceDbTask::SpecConfig.new(
+      spec_name: :animals,
+      schema_file_path: ::Rails.root.join('db/schemas/animals/Schemafile'),
+    )
+  ]
+end
+```
+
+- single database
+
+```
+Ridgepole::ReplaceDbTask.configure do |config|
+  config.database_yml_path = ::Rails.root.join('config/database.yml')
+
+  config.spec_configs = [
+    ::Ridgepole::ReplaceDbTask::SpecConfig.new(
+      spec_name: nil,
+      schema_file_path: ::Rails.root.join('db/schemas/Schemafile')
+    )
+  ]
 end
 ```
 
