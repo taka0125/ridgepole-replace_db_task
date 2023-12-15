@@ -30,6 +30,10 @@ Ridgepole::ReplaceDbTask.configure do |config|
     ::Ridgepole::ReplaceDbTask::SpecConfig.new(
       spec_name: :primary,
       schema_file_path: ::Rails.root.join('db/schemas/primary/Schemafile'),
+      other_options: [
+        '--ignore-tables=users',
+        '--skip-column-comment-change'
+      ],
     ),
     ::Ridgepole::ReplaceDbTask::SpecConfig.new(
       spec_name: :animals,
