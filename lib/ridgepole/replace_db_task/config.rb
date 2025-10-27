@@ -1,13 +1,12 @@
-require "active_support/configurable"
+require "active_support"
+require "active_support/core_ext/class/attribute"
 
 module Ridgepole
   module ReplaceDbTask
     class Config
-      include ActiveSupport::Configurable
-
-      config_accessor :ridgepole, default: 'bundle exec ridgepole'
-      config_accessor :database_yml_path, default: 'config/database.yml'
-      config_accessor :spec_configs, default: [
+      class_attribute :ridgepole, default: 'bundle exec ridgepole'
+      class_attribute :database_yml_path, default: 'config/database.yml'
+      class_attribute :spec_configs, default: [
         ::Ridgepole::ReplaceDbTask::SpecConfig.new(
           spec_name: nil,
           schema_file_path: 'db/schemas/Schemafile'
