@@ -1,5 +1,3 @@
-require "active_support/configurable"
-
 module Ridgepole
   module ReplaceDbTask
     class SpecConfig
